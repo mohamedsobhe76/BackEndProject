@@ -1,4 +1,5 @@
 package com.example.javabackendproject.Controller;
+import com.example.javabackendproject.Services.PatronService;
 import com.example.javabackendproject.model.entities.Patron;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/patrons")
 public class PatronController {
     @Autowired
-    private PatronController patronService;
+    private PatronService patronService;
 
     // GET /api/patrons
     @GetMapping
@@ -23,7 +24,7 @@ public class PatronController {
     // GET /api/patrons/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Patron> getPatronById(@PathVariable Long id) {
-        Patron patron = patronService.getPatronById(id).getBody();
+        Patron patron = patronService.getPatronById(id);
         if (patron != null) {
             return new ResponseEntity<>(patron, HttpStatus.OK);
         } else {
@@ -34,14 +35,14 @@ public class PatronController {
     // POST /api/patrons
     @PostMapping
     public ResponseEntity<Patron> addPatron(@RequestBody Patron patron) {
-        Patron newPatron = patronService.addPatron(patron).getBody();
+            Patron newPatron = patronService.addPatron(patron);
         return new ResponseEntity<>(newPatron, HttpStatus.CREATED);
     }
 
     // PUT /api/patrons/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Patron> updatePatron(@PathVariable Long id, @RequestBody Patron patron) {
-        Patron updatedPatron = patronService.updatePatron(id, patron).getBody();
+        Patron updatedPatron = patronService.updatePatron(id, patron);
         if (updatedPatron != null) {
             return new ResponseEntity<>(updatedPatron, HttpStatus.OK);
         } else {
@@ -52,7 +53,7 @@ public class PatronController {
     // DELETE /api/patrons/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePatron(@PathVariable Long id) {
-        boolean deleted = patronService.deletePatron(id).hasBody();
+        boolean deleted = patronService.deletePatron(id);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {

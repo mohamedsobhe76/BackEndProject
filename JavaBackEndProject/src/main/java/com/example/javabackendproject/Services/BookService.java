@@ -1,5 +1,6 @@
 package com.example.javabackendproject.Services;
 
+import com.example.javabackendproject.Services.ServiceRepos.BookOpRep;
 import com.example.javabackendproject.model.entities.Book;
 import com.example.javabackendproject.reposatories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BookService {
+public class BookService implements BookOpRep {
 
     @Autowired
     private BookRepository bookRepository;

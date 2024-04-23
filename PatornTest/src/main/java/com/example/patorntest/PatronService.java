@@ -1,17 +1,16 @@
-package com.example.javabackendproject.Services;
+package com.example.patorntest;
 
-import com.example.javabackendproject.Services.ServiceRepos.PatronOpRep;
-import com.example.javabackendproject.model.entities.Patron;
-import com.example.javabackendproject.reposatories.PatornRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PatronService implements PatronOpRep {
+public class PatronService {
     @Autowired
-    private PatornRepository patronRepository;
+    private patornREP patronRepository;
 
     public List<Patron> getAllPatrons() {
         return patronRepository.findAll();
@@ -22,10 +21,10 @@ public class PatronService implements PatronOpRep {
     }
 
     public Patron addPatron(Patron patron) {
-        return (Patron) patronRepository.save(patron);
+        return patronRepository.save(patron);
     }
 
-    public Patron updatePatron(Long id, Patron patron) {
+  /*  public Patron updatePatron(Long id, Patron patron) {
         if (patronRepository.existsById(id)) {
             patron.setId(id);
             return (Patron) patronRepository.save(patron);
@@ -41,5 +40,5 @@ public class PatronService implements PatronOpRep {
         } else {
             return false;
         }
-    }
+    }*/
 }
